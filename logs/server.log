@@ -1,0 +1,33 @@
+INFO:     Will watch for changes in these directories: ['/home/workspace']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [251] using StatReload
+INFO:     Started server process [253]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.20.0.1:52668 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     172.20.0.1:52680 - "GET /api/transactions HTTP/1.1" 200 OK
+INFO:     172.20.0.1:52682 - "GET /api/insights?month=2025-11 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:52680 - "GET /api/transactions HTTP/1.1" 200 OK
+INFO:     172.20.0.1:52682 - "GET /api/insights?month=2025-11 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:57524 - "GET /api/transactions HTTP/1.1" 200 OK
+INFO:     172.20.0.1:57528 - "GET /api/insights?month=2025-11 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:57524 - "GET /api/transactions HTTP/1.1" 200 OK
+INFO:     172.20.0.1:57528 - "GET /api/insights?month=2025-11 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34596 - "GET /api/transactions HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34610 - "GET /api/insights?month=2025-11 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34596 - "GET /api/transactions HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34610 - "GET /api/insights?month=2025-11 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:37148 - "GET /api/transactions HTTP/1.1" 200 OK
+INFO:     172.20.0.1:37160 - "GET /api/insights?month=2025-11 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:37148 - "GET /api/transactions HTTP/1.1" 200 OK
+INFO:     172.20.0.1:37160 - "GET /api/insights?month=2025-11 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:40976 - "GET /api/transactions HTTP/1.1" 200 OK
+INFO:     172.20.0.1:40980 - "GET /api/insights?month=2025-11 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:40976 - "GET /api/transactions HTTP/1.1" 200 OK
+INFO:     172.20.0.1:40980 - "GET /api/insights?month=2025-11 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39676 - "GET /api/transactions HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39692 - "GET /api/insights?month=2025-11 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39676 - "GET /api/transactions HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39692 - "GET /api/insights?month=2025-11 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:60596 - "GET / HTTP/1.1" 200 OK
+INFO:     172.20.0.1:60596 - "GET /favicon.ico HTTP/1.1" 404 Not Found

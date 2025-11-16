@@ -1,48 +1,55 @@
 """
-Database Schemas
+Database Schemas for Spend Tracker
 
-Define your MongoDB collection schemas here using Pydantic models.
-These schemas are used for data validation in your application.
-
-Each Pydantic model represents a collection in your database.
-Model name is converted to lowercase for the collection name:
-- User -> "user" collection
-- Product -> "product" collection
-- BlogPost -> "blogs" collection
+Each Pydantic model corresponds to one MongoDB collection (lowercased class name).
 """
-
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
+from datetime import datetime
 
-# Example schemas (replace with your own):
-
-class User(BaseModel):
+class Transaction(BaseModel):
     """
-    Users collection schema
-    Collection name: "user" (lowercase of class name)
+    Collection: "transaction"
+    A single financial transaction.
     """
-    name: str = Field(..., description="Full name")
-    email: str = Field(..., description="Email address")
-    address: str = Field(..., description="Address")
-    age: Optional[int] = Field(None, ge=0, le=120, description="Age in years")
-    is_active: bool = Field(True, description="Whether user is active")
+    amount: float = Field(..., gt=0, description="Transaction amount (positive number)")
+    merchant: str = Field(..., description="Merchant or payee name")
+    description: Optional[str] = Field(None, description="Optional description or memo")
+    category: Optional[str] = Field(None, description="Assigned category (auto or manual)")
+    date: datetime = Field(..., description="Transaction date/time in ISO format")
+    account: Optional[str] = Field(None, description="Account name or type (e.g., Checking)")
+    currency: str = Field("USD", description="Currency code")
 
-class Product(BaseModel):
+class CategoryRule(BaseModel):
     """
-    Products collection schema
-    Collection name: "product" (lowercase of class name)
+    Collection: "categoryrule"
+    Auto-categorization rule using a keyword match on merchant/description.
     """
-    title: str = Field(..., description="Product title")
-    description: Optional[str] = Field(None, description="Product description")
-    price: float = Field(..., ge=0, description="Price in dollars")
-    category: str = Field(..., description="Product category")
-    in_stock: bool = Field(True, description="Whether product is in stock")
+    keyword: str = Field(..., description="Lowercased keyword to match (e.g., 'starbucks')")
+    category: str = Field(..., description="Category to assign when keyword matches")
 
-# Add your own schemas here:
-# --------------------------------------------------
+class Budget(BaseModel):
+    """
+    Collection: "budget"
+    Budget limit per category per month (YYYY-MM).
+    """
+    category: str = Field(..., description="Category name")
+    month: str = Field(..., pattern=r"^\d{4}-\d{2}$", description="Month in format YYYY-MM")
+    limit: float = Field(..., gt=0, description="Spending limit for this category and month")
 
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+# Example list of common categories that the UI may suggest
+class CategorySuggestion(BaseModel):
+    name: str
+    icon: Optional[str] = None
+
+DEFAULT_CATEGORIES: List[CategorySuggestion] = [
+    CategorySuggestion(name="Groceries", icon="shopping-basket"),
+    CategorySuggestion(name="Dining", icon="utensils"),
+    CategorySuggestion(name="Transport", icon="car"),
+    CategorySuggestion(name="Shopping", icon="shopping-bag"),
+    CategorySuggestion(name="Entertainment", icon="film"),
+    CategorySuggestion(name="Bills", icon="credit-card"),
+    CategorySuggestion(name="Health", icon="heart"),
+    CategorySuggestion(name="Travel", icon="plane"),
+    CategorySuggestion(name="Other", icon="circle")
+]
